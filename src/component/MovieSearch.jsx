@@ -1,19 +1,46 @@
 import React, { useState } from "react";
 import classes from "../styles/MovieSearch.module.css";
 import MovieList from "./MovieList";
-import useFind from "../hooks/useFind";
+
+
+
 
 const MovieSearch = () => {
   const [userinput, setUserInput] = useState("");
   const [searchResult, setSearchResult] = useState(null); // State to hold the search results
 
-  const searchMovies = useFind(userinput); // Call the useFind hook at the top level
 
   const handleSearch = () => {
-    setSearchResult(searchMovies); // Update the search results in state
-  };
+    const url = `https://api.themoviedb.org/3/search/movie?query=${userinput}&include_adult=false&language=en-US&page=1`;
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YmQzNDFhNDZhMmUxOWY2NDk1ODI3ZGE3MWY5OWM1YSIsInN1YiI6IjY1MDlhZDAzNDJkOGE1N2U5OGE3YWM1MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.28ctBcf5HOzcIVSUnKdr7woujS38ZO8Ngf8o2k-_vSc",
+      },
+     
+    };
 
-//    console.log("userinput",userinput.current)
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((data) => {
+        setSearchResult(data.results); // Store the search result in state
+       
+      })
+      
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+      if(searchResult){
+        console.log(searchResult)
+      }
+  };
+ 
+if (searchResult){
+  console.log(searchResult)
+}
+
   return (
     <> 
     <div className={classes.searchBox}>
@@ -94,7 +121,7 @@ const MovieSearch = () => {
         </svg>
       </button>
     </div>
-     {searchResult ?  <MovieList searchResult={searchResult.results} /> : <h3>your search movie</h3>}
+ { searchResult ? <MovieList result ={searchResult}/>: <h3>your search movie</h3>}
    
     </>
   );
