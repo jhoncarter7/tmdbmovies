@@ -1,9 +1,9 @@
   
   .boxcontainer {
     display: grid;
-    grid-template-columns: repeat(4, minmax(250px, 1fr)); /* Adjust the column width as needed */
     gap: 20px; 
     padding: 4rem 2rem 2rem 2rem;
+ 
   }
 
 .box {
@@ -11,6 +11,7 @@
     padding: 20px;
     border: 1px solid #ddd;
     text-align: center;
+    cursor: pointer;
   }
   
   /* Style for the box image */
@@ -24,4 +25,27 @@
     margin-top: 10px;
     font-size: 18px;
     color: #333;
+  }
+@media (min-width: 900px) {
+    .boxcontainer{ 
+        grid-template-columns: repeat(4, 1fr)
+    }; 
+}
+  @media (max-width:768px) {
+    .boxcontainer{
+      grid-template-columns: repeat(3, minmax(150px, 1fr));
+      
+    }
+  }
+  @media (max-width:568px) {
+    .boxcontainer{
+      grid-template-columns: repeat(2, minmax(150px, 1fr));
+      
+    }
+  }
+  @media (max-width:378px) {
+    .boxcontainer{
+      grid-template-columns: repeat(1, minmax(150px, 1fr));
+      
+    }
   }

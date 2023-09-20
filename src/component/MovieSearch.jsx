@@ -43,6 +43,7 @@ if (searchResult){
 
   return (
     <> 
+     <h1>Find Your Movies</h1>
     <div className={classes.searchBox}>
       <input
         className={classes.searchInput}

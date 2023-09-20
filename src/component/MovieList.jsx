@@ -3,6 +3,10 @@ import classes from '../styles/MovieList.module.css'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
+
+
+
 const MovieList =  ({result}) => {
   const API_IMG="https://image.tmdb.org/t/p/w500";
   const [page, setPage] = useState(1);
@@ -23,8 +27,9 @@ const MovieList =  ({result}) => {
     <div className={classes.boxcontainer}>
    {nodata? <h3 style={{alignItems:"center"}}>Sorry its's empty now !</h3>:
     currentMovies.map((mv, i)=> <div className={classes.box} key={mv.id}>
-          <img src={`${API_IMG}${mv.poster_path}`} alt={mv.title} className={classes.boximage}/>
+         <Link to={`/moviedetail/${mv.id}`}> <img src={`${API_IMG}${mv.poster_path}`} alt={mv.title} className={classes.boximage}/>
           <h2 className={classes.boxtitle}>{mv.title}</h2>
+          </Link>
    </div>  )  } 
      </div>
      <Stack spacing={2}>
